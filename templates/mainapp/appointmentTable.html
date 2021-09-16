@@ -2,10 +2,6 @@
 {% load static %}
 {% block navblock %}
  
-  
-
-
-
     <div class="inner-layer">
         <div class="container">
             <div class="row no-margin">
@@ -30,25 +26,66 @@
                     <form method="POST">
                         {%csrf_token%}
                         
-                 
                     <div class="form-body">
                         <div class="row form-row">
-                            <input type="text" name="fullname" placeholder="Enter Full name" class="form-control">
+                            <input type="text" name="fullname" placeholder="Enter Full name" class="form-control" value="{{request.user.first_name}} {{request.user.last_name}}">
                         </div>
                         <div class="row form-row">
-                            <input type="text" name="phonenumber" placeholder="Enter Mobile Number" class="form-control">
+                            <input type="text" name="phonenumber" placeholder="Enter Mobile Number" class="form-control" value="{{request.user.appuser.contact}}">
                         </div>
                         <div class="row form-row">
-                            <input type="email" name="email" placeholder="Enter Email Address" class="form-control">
+                            <input type="email" name="email" placeholder="Enter Email Address" class="form-control" value="{{request.user.email}}">
                         </div>
                         <div class="row form-row">
-                            <input type="text" name="age" placeholder="Enter Age" class="form-control">
+                            <input type="text" name="age" placeholder="Enter Age" class="form-control" value="{{request.user.appuser.age}}">
                         </div>
                         <div class="row form-row">
-                            <input type="text" name="address"placeholder="Enter Address Details" class="form-control">
+                            <input type="text" name="address"placeholder="Enter Address Details" class="form-control" value="{{request.user.appuser.address}}">
+                        </div>
+                        <hr>
+                        <h5 class="text-center">Appointment Details</h5>
+                        <hr>
+
+
+                        <div class="row form-row">
+                        <select name="problem" id="problemid" placeholder='Select problem' class="form-control" required>
+                            <option value="">Choose Problem</option>
+                            {% for i in problems%}
+                            <option value="{{i.id}}">{{i.problem_related}}</option>
+                            {% endfor%}
+                        </select>
+                    </div>
+                        <div class="row form-row">
+                            <input type="date" name="date" id='dateid' placeholder="Excepted Appointment Date" class="form-control">
                         </div>
                         <div class="row form-row">
-                            <input type="date" name="date" placeholder="Excepted Appointment Date" class="form-control">
+                            <select name="time" id="timeid" placeholder='Select problem' class="form-control" required>
+
+                                <option value="">Choose Time</option>
+                                <option value="09:00 am - 09:30 am">09:00 am - 09:30 am</option>
+                                <option value="09:30 am - 10:00 am">09:30 am - 10:00 am</option>
+                                <option value="10:00 am - 10:30 am">10:00 am - 10:30 am</option>
+                                <option value="10:30 am - 11:00 am">10:30 am - 11:00 am</option>
+                                <option value="11:00 am - 11:30 am">11:00 am - 11:30 am</option>
+                                <option value="11:30 am - 12:00 am">11:30 am - 12:00 am</option>
+                                <option value="12:00 pm - 12:30 pm">12:00 pm - 12:30 pm</option>
+                                <option value="12:30 pm - 01:00 pm">12:30 pm - 01:00 pm</option>
+                                <option value="01:00 pm - 01:30 pm">01:00 pm - 01:30 pm</option>
+                                <option value="01:30 pm - 02:00 pm">01:30 pm - 02:00 pm</option>
+                                <option value="02:00 pm - 02:30 pm">02:00 pm - 02:30 pm</option>
+                                <option value="02:30 pm - 03:00 pm">02:30 pm - 03:00 pm</option>
+                                <option value="03:00 pm - 03:30 pm">03:00 pm - 03:30 pm</option>
+                                <option value="03:30 pm - 04:00 pm">03:30 pm - 04:00 pm</option>
+                                <option value="04:00 pm - 04:30 pm">04:00 pm - 04:30 pm</option>
+                                <option value="04:30 pm - 05:00 pm">04:30 pm - 05:00 pm</option>
+                                
+                            </select>
+                        </div>
+                        <div class="row form-row" >
+                            <select name="doctor" id='available' placeholder='Select problem' class="form-control" required>
+                                <option value="">Select Doctor</option>
+                            </select>
+                            <small>First select problem, date and time to fetch available doctors.</small>
                         </div>
                         <div class="row form-row">
                             <textarea class="form-control" name="desc"id="exampleFormControlTextarea1"  placeholder="Description" rows="2"></textarea>
@@ -74,15 +111,59 @@
 
 
 
-   <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
-   <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
-   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
-   <script src="https://kit.fontawesome.com/60f8143899.js" crossorigin="anonymous"></script>
+   
+   
 
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.9.0/js/bootstrap-datepicker.min.js" integrity="sha512-T/tUfKSV1bihCnd+MxKD0Hm1uBBroVYBOYSk1knyvQ9VyZJpc/ALb4P0r6ubwVPSGB2GvjeoMAJJImBG12TiaQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
    <br><br>
    <br>
    <br>
    <br>
+
+   <script>
+           
+            $("#timeid").on('blur', function () {
+                var _problem = $('#problemid').val();
+                var _date = $('#dateid').datepicker({ dateFormat: 'dd-mm-yy' }).val();
+                var _time = $(this).val();
+                alert(_date)
+                
+                if (_problem == '') {
+                    alert('Choose your problem');
+                    return;
+                }
+                else if(_date == ''){
+                    alert("Choose appointment date");
+                    return;
+                }
+                else if(_time == ''){
+                    alert("Choose appointment time");
+                    return;
+                }
+                                
+                $.ajax({
+                    url: '{% url "mainapp:checkAvaibility" %}',
+                    type: 'post',
+                    data: {
+                        problem: _problem,
+                        date:_date,
+                        time:_time,
+                        csrfmiddlewaretoken: "{{csrf_token}}"
+                    },
+                    dataType: 'json',
+                    success: function (res) {
+                            $("#available").html(res.data)
+                        
+
+
+                    }
+                        });
+
+            });
+        
+
+        
+   </script>
 
    {% include 'mainapp/footer.html' %}
 

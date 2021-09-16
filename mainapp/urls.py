@@ -10,6 +10,12 @@ urlpatterns=[
     path('appointment',views.appointment, name='appointment'),
     path('oldappointment',views.oldappointment, name='oldappointment'),
     path('response/<int:id>',views.response, name='response'),
+
+
+
+    path('checkAvaibility',views.checkAvaibility, name='checkAvaibility'),
+
+
 ]
 
 

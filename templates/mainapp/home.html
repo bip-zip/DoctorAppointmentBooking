@@ -29,6 +29,8 @@
 
     }
 </style>
+{% include 'mainapp/messages.html' %}
+
 <img src="{% static 'mainapp/pics/image.jpg' %}" class="img-fluid" style="width: 100%;" alt=" amb">
 <div class="detail">
         <h1 class="fw-1">
@@ -36,7 +38,7 @@
             BOOKING 
         </h1>
         <p>Book your appointments with professional doctors with Appointments Nepal.</p><br>
-        <a href=""><button id='appbut'>Apply appointment</button></a>
+        <a href="/app/appointment"><button id='appbut'>Apply appointment</button></a>
 </div>
 
 

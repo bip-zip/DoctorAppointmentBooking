@@ -1,7 +1,7 @@
 from django.shortcuts import render,redirect
-from .forms import DoctorForm
+
 from django.contrib import messages
-from .models import Doctor
+
 from mainapp.models import Appointment
 from django.contrib.auth.models import User
 from accounts.auth import admin_only, doctor_only
@@ -14,13 +14,13 @@ from django.contrib.auth.decorators import login_required
 
 @login_required
 def doctor_home(request):
-    doctor=Doctor.objects.count()
+    # doctor=Doctor.objects.count()
     patient=User.objects.filter(is_staff=0).count()
     appointment=Appointment.objects.count()
     appointments=Appointment.objects.all().order_by("-id")[:5]
     
     context={
-        'doctor':doctor,
+        # 'doctor':doctor,
         'patient':patient,
         'appointment':appointment,
         'appointments':appointments

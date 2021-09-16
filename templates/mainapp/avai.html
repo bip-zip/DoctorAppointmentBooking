@@ -1,0 +1,5 @@
+{% for i in data%}
+    <option value="{{i.doctor.id}}">{{i.doctor.user.first_name}} {{i.doctor.user.last_name}}</option>
+{% empty %}
+<option value="">No available doctors</option>
+{% endfor %}
