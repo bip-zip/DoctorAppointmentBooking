@@ -40,6 +40,7 @@ class Availabity(models.Model):
     doctor=models.ForeignKey(DoctorUser, on_delete=models.CASCADE)
     date= models.DateField(null=False)
     time= models.CharField(max_length=20, null=True,choices=times )
+    booked= models.BooleanField(default=False)
 
     class Meta:
         unique_together = ('date', 'time')

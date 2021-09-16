@@ -102,38 +102,32 @@
                         <table class="table">
                             <thead>
                               <tr>
-                                <th scope="">S.N</th>
-                                <th scope="col">Appointment Fixed Date</th>
+                              
+                                <th scope="col">Doctor's Name</th>
                                 <th scope="col">Applied On</th>   
-                                <th scope="col">Response</th>   
-                          
+                                <th scope="col">Expected Date and Time</th>   
+                                <th scope="col">Status</th>   
+                                <th></th>
                               </tr>
                             </thead>
-                            <tbody>
+                            <tbody style="font-weight: normal;">
                                 {% for i in appointments %}
-                                {% if i.seen == True %}
+
                                 <tr>
-                                    <th scope="row">{{ forloop.counter }}</th>
-                                    <td>{{ i.appointmentdate}}</td>
-                                    <td>{{ i.appliedon}}</td>
-                                  
                                    
-                                    <td><a href="{% url 'mainapp:response' id=i.id %}"><button class="btn btn-info btn-sm" >View Response</button></a></td>
-                                    
+                                    <th><a href="{% url 'mainapp:response' id=i.id %}"> {{ i.doctor.user.first_name}} {{ i.doctor.user.last_name}}</a></th>
+                                    <td><small>{{ i.applied_date}}</small></td>
+                                    <td><small>{{ i.date}}, {{i.time}}</small></td>
+                                    {% if not i.response == None%}
+                                    <td class='badge badge-success'>Completed</td>
+                                    {% else%}
+                                    <td class='badge badge-warning'>Pending</td>
+
+                                    {% endif%}
                                   </tr>
                              
-                              {% else %}
-                              <tr class="table-info">
-                                <th scope="row">{{ forloop.counter }}</th>
-                                <td>Pending</td>
-                                <td>{{ i.appliedon}}</td>
                               
-                               
-                                <td><p class="badge badge-warning">Pending</p></td>
-                                
-                              </tr>
-                    
-                              {% endif %}
+                
                              
                               {% empty %}
                             <tr>

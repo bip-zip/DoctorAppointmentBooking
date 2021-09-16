@@ -16,7 +16,7 @@ def about(request):
 
 def profile(request):
     user=request.user
-    appointments=Appointment.objects.filter(user=user)
+    appointments=Appointment.objects.filter(user=user).order_by('-id')
     context={
         'appointments':appointments
     }
@@ -46,6 +46,11 @@ def appointment(request):
 
         appform=Appointment(user=user, name=name,phonenumber=number,email=email,age=age,address=address,date=date,desc=desc, time=time, doctor=ac_doctor)
         appform.save()
+
+        availability=Availabity.objects.get(date=date, time=time, doctor=ac_doctor)
+        availability.booked=True
+        availability.save()
+
         
         message1=('Hello,Dr. '+ str(ac_doctor.user.first_name) + str(ac_doctor.user.last_name) + ' someone has booked appointment on'+ str(date) + ',' + str(time) +' with you. Check your profile for more information.' )
         send_mail('Appointment Nepal - Appointment alert!',message1,'herohiralaal14@gmail.com',[ac_doctor.user.email],fail_silently=False)
@@ -65,7 +70,7 @@ def appointment(request):
 @login_required
 def oldappointment(request):
     user=request.user
-    appointments=Appointment.objects.filter(user=user)
+    appointments=Appointment.objects.filter(user=user).order_by('-id')
     context={
         'appointments':appointments
     }
@@ -73,11 +78,7 @@ def oldappointment(request):
 
 
 def response(request,id):
-
-     
     appointment=Appointment.objects.get(id=id)
-    
-    
     context={
         'appointment':appointment,
     }
@@ -92,7 +93,7 @@ def checkAvaibility(request):
         print(problem,date,time)
 
         doctors= DoctorUser.objects.filter(specilization=(Specilization.objects.get(id=problem)))
-        avai=Availabity.objects.filter(doctor__in=doctors,date=date,time=time)
+        avai=Availabity.objects.filter(doctor__in=doctors,date=date,time=time, booked=False)
 
         t=render_to_string('mainapp/avai.html',{'data':avai},request=request)
         return JsonResponse({'data':t})
