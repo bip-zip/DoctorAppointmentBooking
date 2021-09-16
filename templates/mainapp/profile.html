@@ -1,0 +1,169 @@
+{% extends 'mainapp/base.html' %}
+{% load static %}
+{% block navblock %}
+<style>
+    body {
+    margin: 0;
+    color: #2e323c;
+    background: #f5f6fa;
+    position: relative;
+    height: 100%;
+}
+.account-settings .user-profile {
+    margin: 0 0 1rem 0;
+    padding-bottom: 1rem;
+    text-align: center;
+}
+.account-settings .user-profile .user-avatar {
+    margin: 0 0 1rem 0;
+}
+.account-settings .user-profile .user-avatar img {
+    width: 90px;
+    height: 90px;
+    -webkit-border-radius: 100px;
+    -moz-border-radius: 100px;
+    border-radius: 100px;
+}
+.account-settings .user-profile h5.user-name {
+    margin: 0 0 0.5rem 0;
+}
+.account-settings .user-profile h6.user-email {
+    margin: 0;
+    font-size: 0.8rem;
+    font-weight: 400;
+    color: #9fa8b9;
+}
+.account-settings .about {
+    margin: 2rem 0 0 0;
+    text-align: center;
+}
+.account-settings .about h5 {
+    margin: 0 0 15px 0;
+    color: #007ae1;
+}
+.account-settings .about p {
+    font-size: 0.825rem;
+}
+
+.card {
+    background: #ffffff;
+    -webkit-border-radius: 5px;
+    -moz-border-radius: 5px;
+    border-radius: 5px;
+    border: 0;
+    margin-bottom: 1rem;
+}
+</style>
+{% include 'mainapp/messages.html' %}
+
+<div class="ok container my-3">
+    <div class="container">
+        <div class="row gutters">
+        <div class="col-xl-3 col-lg-3 col-md-12 col-sm-12 col-12">
+        <div class="card h-100">
+            <div class="card-body">
+                <div class="account-settings">
+                    <div class="user-profile">
+                        <div class="user-avatar">
+                            <img src="{{request.user.appuser.imageUrl}}" alt="Maxwell Admin">
+                        </div>
+                        <h5 class="user-name">{{request.user.username}}</h5>
+                        <h6 class="user-email">{{request.user.email}}</h6>
+                    </div>
+                    <div class="about">
+                        <p>First Name: {{request.user.first_name}}</p>
+                        <p>Last Name: {{request.user.last_name}}</p>
+                        <p>Contact: {{request.user.appuser.contact}}</p>
+                        <p>Age: {{request.user.appuser.age}}</p>
+                        <p>Address: {{request.user.appuser.address}}</p>
+                        <br>
+                        <a href="{% url  'accounts:profileupdate' user.appuser.id  %}" class="btn btn-primary btn-sm">Update details</a>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+        </div>
+        <div class="col-xl-9 col-lg-9 col-md-12 col-sm-12 col-12">
+        <div class="card h-100">
+            <div class="card-body">
+                <div class="row gutters">
+                    <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
+                        <h5 class="mb-2 text-primary text-center fw-light ">Your previous appointments</h5>
+                    </div>
+                    
+                    <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
+                        <div class="text-right">
+                            <button type="button" class="btn btn-outline-primary btn-sm">All Appointments</button><br>
+                        </div>
+                    </div>
+
+                    <div class="container mt-2">
+                        <table class="table">
+                            <thead>
+                              <tr>
+                                <th scope="">S.N</th>
+                                <th scope="col">Appointment Fixed Date</th>
+                                <th scope="col">Applied On</th>   
+                                <th scope="col">Response</th>   
+                          
+                              </tr>
+                            </thead>
+                            <tbody>
+                                {% for i in appointments %}
+                                {% if i.seen == True %}
+                                <tr>
+                                    <th scope="row">{{ forloop.counter }}</th>
+                                    <td>{{ i.appointmentdate}}</td>
+                                    <td>{{ i.appliedon}}</td>
+                                  
+                                   
+                                    <td><a href="{% url 'mainapp:response' id=i.id %}"><button class="btn btn-info btn-sm" >View Response</button></a></td>
+                                    
+                                  </tr>
+                             
+                              {% else %}
+                              <tr class="table-info">
+                                <th scope="row">{{ forloop.counter }}</th>
+                                <td>Pending</td>
+                                <td>{{ i.appliedon}}</td>
+                              
+                               
+                                <td><p class="badge badge-warning">Pending</p></td>
+                                
+                              </tr>
+                    
+                              {% endif %}
+                             
+                              {% empty %}
+                            <tr>
+                                
+                                <td><h5 class="text-center my-4 text-secondary">No prevoius appointments</h5></td>
+                                
+
+                            </tr>
+                            {% endfor %}
+                            
+                    
+                
+                            </tbody>
+                          </table>
+                    </div>
+
+
+                </div>
+            </div>
+        </div>
+        </div>
+        </div>
+        </div>
+</div>
+
+
+   
+{% include 'mainapp/footer.html' %}
+
+ 
+<script src="https://kit.fontawesome.com/60f8143899.js" crossorigin="anonymous"></script>
+
+{% endblock %}

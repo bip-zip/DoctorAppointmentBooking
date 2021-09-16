@@ -1,0 +1,70 @@
+{% extends 'mainapp/base.html' %}
+{% load static %}
+{% block navblock %}
+
+
+
+<div class="container">
+    <h1>Your Appointments</h1>
+    
+    <table class="table">
+        <thead>
+          <tr>
+            <th scope="">S.N</th>
+            <th scope="col">Appointment Fixed Date</th>
+            <th scope="col">Applied On</th>   
+            <th scope="col">Response</th>   
+            
+
+                   
+
+          </tr>
+        </thead>
+        <tbody>
+            {% for i in appointments %}
+            {% if i.seen == True %}
+            <tr>
+                <th scope="row">{{ forloop.counter }}</th>
+                <td>{{ i.appointmentdate}}</td>
+                <td>{{ i.appliedon}}</td>
+              
+               
+                <td><a href="{% url 'mainapp:response' id=i.id %}"><button class="btn btn-info btn-sm" >View Response</button></a></td>
+                
+              </tr>
+         
+          {% else %}
+          <tr class="table-info">
+            <th scope="row">{{ forloop.counter }}</th>
+            <td>Pending</td>
+            <td>{{ i.appliedon}}</td>
+          
+           
+            <td><p class="badge badge-warning">Pending</p></td>
+            
+          </tr>
+
+          {% endif %}
+          {% empty %}
+              <h6 class="text-center my-4">No prevoius appointments</h6>
+        {% endfor %}
+
+
+         
+        </tbody>
+      </table>
+
+</div>
+<br>
+<br>
+<br>
+<br>
+<br> <br><br><br><br><br>
+{% include 'mainapp/footer.html' %}
+
+
+
+
+
+
+{% endblock %}

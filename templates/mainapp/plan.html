@@ -1,0 +1,75 @@
+{% extends 'mainapp/base.html' %}
+{% load static %}
+{% block navblock %}
+
+<div class="containers">
+    <h2 class="tittle text-center text-info mb-5 ">Plan</h2>
+</div>
+
+
+<div class="container">
+    <div class="row featurette">
+        <div class="">
+            <img class="img-responsive mx-4 ml-5 mt-5" src="{% static 'mainapp/pics/hee.jpg' %}" alt="">
+
+
+        </div>
+        <div class="col-lg-6 ml-4 ">
+            <h4 class="ml-1">Master plan of SCH</h4>
+            <ul >
+                <li>Multi-storey super-specialty building with the following distribution plan: 1st: floor-ICU 2nd:
+                    surgical GI 3rd: Gastroenterology 4th: Urology/Kidney Transplant 5th: Nephrology/Dialysis 6th:
+                    Cardiovascular Surgery/Heart Transplant 7th: Cardiology 8th: Neurosurgery 9th: Neurology 9th:
+                    Plastic/Reconstruction Surgery 10th Dermatology 11th: Orthopedics 12th ENT 13th Ophthalmology
+                    14th: Thoracic/Respiratory medicine 15th: Oncosurgery / Medical hematology &amp; oncology /
+                    Transplant 16th Rheumatology &amp; Endocrinology 17 Fertility surgery/ Medicine</li>
+                <li>Radiotherapy &amp; Nuclear Medicine block.</li>
+                <li>Mutistorey building for Emergency &amp; Faculty rooms/ Library/ telemedicine/ Teaching rooms/
+                    Research Rooms/ Conference hall</li>
+            </ul> <br>
+        </div>
+
+
+       
+    </div>
+
+
+
+    <div class="row featurette">
+        <div >
+            <img class=" img-responsive mx-4 ml-5 mt-5" src="{% static 'mainapp/pics/helo.jpg' %}" alt="">
+
+
+        </div>
+
+        <div class=" col-lg-6 ml-4">
+            <h4 class="ml-4">OPD</h4>
+            <p class=" ml-5">System: e-number with time&gt;Screening&gt;Registration with stickers
+                only&gt;Vitals Room &gt;OPD double
+                carbon-included sheets&gt; Respective Dept. room &gt;one copy kept in room and the other given to
+                pt.
+                &gt;Investigation form (two only: one for body fluids and other for other investigations) &gt; Cash
+                counter&gt;Phlebotomist/diagnostic room&gt;All investigation reports in computer print format&gt;
+                Report
+                to Dr. &gt; Rx in computer print&gt;Referral colored stickers with date and sign of ref. Dr.
+                &gt;Admission re-registration with “A” added to the OPD registration number&gt;Admission form filled
+                (print) &amp; Notes Sheet&gt;Discharge (computer printed copy) &gt; Cash counter/ Registration
+                &gt;Follow-up: OPD Schedule.</p>
+        </div>
+        <br>
+        <br>
+       
+
+
+
+    </div>
+    <br>
+    <br>
+</div>
+
+{% include 'mainapp/footer.html' %}
+
+ 
+<script src="https://kit.fontawesome.com/60f8143899.js" crossorigin="anonymous"></script>
+
+{% endblock %}

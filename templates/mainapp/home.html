@@ -1,0 +1,48 @@
+{% extends 'mainapp/base.html' %}
+{% load static %}
+{% block navblock%}
+<style>
+    footer{
+        margin-top: -90px;
+    }
+   
+    .detail{
+        width:300px;
+        position: relative;
+        top: -530px;
+        left: 80px;
+    }
+    #appbut{
+        background-color: #5279cf;
+        border-radius:40px;
+        border:none;
+        padding: 10px;
+        color: #fff;
+        font-weight: bold;
+
+    }
+    #appbut:hover{
+        background-color: #fff;
+        color: #5279cf;
+        border:2px solid #5279cf;
+        cursor: pointer;
+
+    }
+</style>
+<img src="{% static 'mainapp/pics/image.jpg' %}" class="img-fluid" style="width: 100%;" alt=" amb">
+<div class="detail">
+        <h1 class="fw-1">
+           <span style="color: #5279cf; ">APPOINTMENT</span><br>
+            BOOKING 
+        </h1>
+        <p>Book your appointments with professional doctors with Appointments Nepal.</p><br>
+        <a href=""><button id='appbut'>Apply appointment</button></a>
+</div>
+
+
+<!-- container -->
+
+
+{% include 'mainapp/footer.html'%}
+<script src="https://kit.fontawesome.com/60f8143899.js" crossorigin="anonymous"></script> 
+{% endblock %}

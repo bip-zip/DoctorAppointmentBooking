@@ -1,0 +1,44 @@
+{% extends 'mainapp/base.html' %}
+{% load static %}
+{% block navblock %}
+
+
+<link href="{% static 'mainapp/css/navbar.css'   %}" rel="stylesheet" type="text/css" />
+<div class="container mt-2">
+<div class="row">
+    <div class="col-lg-6">
+        <img src="{% static 'mainapp/pics/register.jpg' %}" class="img-fluid my-5 " style="width: 700px; height: 600px; " alt=" image">
+    </div>
+
+            <div class="col-lg-6 border rounded pb-2  ">
+                <h1 class="text-center  text-info m-1 " >Register as a doctor </h1>
+                {% include 'mainapp/messages.html' %}
+                <form  class="form" method="POST" enctype="multipart/form-data">
+                {%csrf_token%}
+                <table class="table table-striped ">
+                    {{form1.as_table}}
+                    
+                </table><hr>
+                <h5 class="text-center">Addtional information</h5>
+                <table class="table table-striped ">
+                {{form2.as_table}}
+                </table>
+               
+    
+                    
+                    <button type="submit" class="btn btn-primary col-lg-3 float-right mx-4">Register</button>
+                  </form>
+                
+            </div>
+   
+        </div>
+    </div>
+
+<br>
+{% include 'mainapp/footer.html' %}
+
+  
+<script src="https://kit.fontawesome.com/60f8143899.js" crossorigin="anonymous"></script>
+
+{% endblock %}
+

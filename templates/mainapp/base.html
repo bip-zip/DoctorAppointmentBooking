@@ -1,0 +1,96 @@
+<!doctype html>
+{% load static %}
+<html lang="en">
+  <head>
+   
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+
+    <title>Civil Service Hospital</title>
+    <link href="{% static 'mainapp/css/navbar.css'   %}" rel="stylesheet" type="text/css" />
+    <link href="{% static 'mainapp/css/appoint.css'   %}" rel="stylesheet" type="text/css" />
+    <link rel="icon" sizes="192x192" href="{% static 'mainapp/pics/logo1.png' %}" >
+    
+  </head>
+  <body>
+   <!-- heading -->
+   <nav class="navbar navbar-dark bg-primary justify-content-between ">
+    <a class="navbar-brand ok" href="#"><i class="fas fa-phone-square-alt"></i> 01-42345674 &nbsp;   &nbsp;  <i class="far fa-envelope"></i> appointment@nepapp.np</a>
+
+  </nav>
+  <!-- end head -->
+
+  
+<!-- head1 -->
+  <nav class="navbar navbar-expand-lg navbar-light bg-light sticky-top" >
+    
+    
+    
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarNavDropdown">
+      <ul class="navbar-nav ">
+        {% if user.is_authenticated %}
+      <li class="nav-item">
+        <a class="nav-link" href="{% url 'mainapp:profile'%}"><i class="far fa-user-circle"></i>&nbsp;Logged in as: <b>{{user.username}}</b></a>
+      </li>
+        {% else %}
+        <li class="nav-item">
+          <a class="nav-link" href="{% url 'accounts:login'%}">Login</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="{% url 'accounts:register'%}">Register</a>
+        
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="{% url 'accounts:register_doctor'%}">Register as a doctor</a>
+        
+        </li>
+   
+    {% endif %}
+      </ul>
+      <ul class="navbar-nav ml-auto">
+        <li class="nav-item {{active_home}}">
+          <a class="nav-link" href="{% url 'mainapp:home'%}">Home <span class="sr-only">(current)</span></a>
+        </li>
+        <li class="nav-item dropdown {{active_appointment}}">
+          <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+             Your Appointments
+          </a>
+          <div class=" zindex-tooltip dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
+            <a class="dropdown-item" href="{% url 'mainapp:appointment'%}">Apply appointment</a>
+            <a class="dropdown-item" href="{% url 'mainapp:oldappointment'%}">Old appointments</a>
+          
+          </div>
+        </li>
+        <li class="nav-item {{active_about}}">
+          <a class="nav-link" href="{% url 'mainapp:about'%}">About us</a>
+        </li>
+       
+        
+     
+        <li class="nav-item {{active_contact}}">
+          <a class="nav-link" href="{% url 'mainapp:contact'%}">Feedbacks</a>
+        </li>
+        {% if user.is_authenticated %}
+        <li class="nav-item {{active_logout}}">
+          <a class="nav-link" href="{% url 'accounts:logout'%}">Logout</a>
+        </li>
+        {% endif %}
+       
+      </ul>
+    </div>
+  </nav>
+  
+    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+  </body>
+{% block navblock %}
+{% endblock %}
+
+</html>

@@ -1,0 +1,35 @@
+*{
+    overflow-x: wrap;
+}
+.ambika{
+    position: relative;
+    top: -9em;
+    text-align: center;
+    color: white;
+}
+.pragh{
+    margin-top: -7em;
+}
+.images{
+    filter:brightness(0.7);
+    overflow: hidden;
+}
+@import url('https://fonts.googleapis.com/css2?family=Open+Sans&display=swap');
+.ok{
+    font-family: 'Open Sans', sans-serif;
+    font-size: 1em;
+    font-weight: bold;
+}
+.log
+{
+    display: flex;}
+
+@media (min-width: 576px) {
+
+
+.login{
+ width:120px;
+ margin-left:0px;
+ }
+}
+

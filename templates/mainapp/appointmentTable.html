@@ -1,0 +1,90 @@
+{% extends 'mainapp/base.html' %}
+{% load static %}
+{% block navblock %}
+ 
+  
+
+
+
+    <div class="inner-layer">
+        <div class="container">
+            <div class="row no-margin">
+                <div class="col-sm-7">
+                    <div class="content">
+                        <h1>Book your Appointment Now and save your time</h1>
+                        <br>
+                        <p>Hospital, an institution that is built, staffed, and equipped for the diagnosis of disease; 
+                            for the treatment, both medical and surgical, of the sick and the injured; 
+                            and for their housing during this process....
+                            The modern hospital also often serves as a centre for investigation and for teaching.</p>
+
+                    </div>
+                </div>
+                <div class="col-sm-5">
+                    <div class="form-data">
+                        <div class="form-head">
+                            <h2>Book Appointment</h2>
+
+                        </div>
+
+                    <form method="POST">
+                        {%csrf_token%}
+                        
+                 
+                    <div class="form-body">
+                        <div class="row form-row">
+                            <input type="text" name="fullname" placeholder="Enter Full name" class="form-control">
+                        </div>
+                        <div class="row form-row">
+                            <input type="text" name="phonenumber" placeholder="Enter Mobile Number" class="form-control">
+                        </div>
+                        <div class="row form-row">
+                            <input type="email" name="email" placeholder="Enter Email Address" class="form-control">
+                        </div>
+                        <div class="row form-row">
+                            <input type="text" name="age" placeholder="Enter Age" class="form-control">
+                        </div>
+                        <div class="row form-row">
+                            <input type="text" name="address"placeholder="Enter Address Details" class="form-control">
+                        </div>
+                        <div class="row form-row">
+                            <input type="date" name="date" placeholder="Excepted Appointment Date" class="form-control">
+                        </div>
+                        <div class="row form-row">
+                            <textarea class="form-control" name="desc"id="exampleFormControlTextarea1"  placeholder="Description" rows="2"></textarea>
+                        </div>
+                        <div class="row form-row">
+                            <button class="btn btn-success btn-appointment" type="submit">
+                                Book Appointment
+                            </button>
+
+
+                        </div>
+                   
+                    </div>
+                </form>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+
+
+
+
+
+
+   <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+   <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+   <script src="https://kit.fontawesome.com/60f8143899.js" crossorigin="anonymous"></script>
+
+   <br><br>
+   <br>
+   <br>
+   <br>
+
+   {% include 'mainapp/footer.html' %}
+
+   {% endblock %}
+    

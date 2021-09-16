@@ -1,0 +1,47 @@
+{% extends 'mainapp/base.html' %}
+{% load static %}
+{% block navblock %}
+
+
+
+
+<br>
+
+<link href="{% static 'mainapp/css/navbar.css'   %}" rel="stylesheet" type="text/css" />
+<div class="container">
+<div class="row">
+    <div class="col-lg-6">
+        <img   <img src="{% static 'mainapp/pics/login.jpg' %}" class="img-fluid " style="width: 650px; height: 350px; " alt=" image"> 
+    </div>
+
+            <div class="col-lg-6 border rounded pb-2  ">
+                <h1 class="text-center  text-info m-1 " >Login </h1>
+                <hr>
+                {% include 'mainapp/messages.html' %}
+                <form  class="form" method="POST">
+                {%csrf_token%}
+                <table class="table  ">
+                    {{form.as_table}}
+
+                </table>
+                <hr>
+               
+    
+                    
+                    <button type="submit" class="btn btn-primary col-lg-3 float-right mx-4 login">login</button>
+                  </form>
+                
+            </div>
+   
+        </div>
+    </div>
+
+<br>
+{% include 'mainapp/footer.html' %}
+
+  
+<script src="https://kit.fontawesome.com/60f8143899.js" crossorigin="anonymous"></script>
+
+{% endblock %}
+
+

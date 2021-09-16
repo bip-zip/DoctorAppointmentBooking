@@ -1,0 +1,89 @@
+{% extends 'mainapp/base.html' %}
+{% load static %}
+{% block navblock %}
+<title>appointment details</title>
+
+<h2 class="text-center">
+    Response For Your Appointment 
+
+</h2>
+<br>
+
+<div class="container">
+    <div class="col-lg-8 mx-auto">
+        <h5 class="alert alert-info text-white" style="background-color: green  !important;">Response:&nbsp;{{appointment.response}}</h5>
+        <div class="border rounded ">
+            <table class="table table-striped">
+                <tr>
+                    <th>Name:&nbsp;{{appointment.name}}</th>         
+                </tr>
+                
+                <tr>
+                    <th>Phone:&nbsp;{{appointment.phonenumber}}</th>
+                    
+                </tr>
+                <tr>
+                    <th>Email:&nbsp;{{appointment.email}}</th>
+                    
+                </tr>
+                <tr>
+                    <th>Age:&nbsp;{{appointment.age}}</th>
+                    
+                </tr>
+                <tr>
+                    <th>Address:&nbsp;{{appointment.address}}</th>
+                    
+                </tr>
+               
+                
+                <tr>
+                    <th>Desc:&nbsp;{{appointment.desc}}</th>
+                    
+                </tr>
+               
+                
+                <tr>
+                    <th>Applied On:&nbsp;{{appointment.appliedon}}</th>
+                    
+                </tr>
+                <tr>
+                    <th>Expected Date:&nbsp;{{appointment.date}}</th>
+                    
+                </tr>
+
+                <tr class="text-primary">
+                    <th>Doctor Name:&nbsp;{{appointment.doctor.doctorName}}</th>
+                    
+                </tr>
+                
+
+            </table>
+            <a href="{%url 'mainapp:oldappointment'%}" class="btn btn-primary">Back To All Appointments</a>
+          
+        </div>
+            
+            
+           
+
+ 
+
+
+
+    </div>
+
+</div>
+
+
+
+
+<script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+<script src="https://kit.fontawesome.com/60f8143899.js" crossorigin="anonymous"></script>
+
+
+
+
+{% include 'mainapp/footer.html' %}
+
+{% endblock %}
