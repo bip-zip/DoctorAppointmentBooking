@@ -158,7 +158,7 @@
                   
                   <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
                       <div class="text-right">
-                          <button type="button" class="btn btn-outline-primary btn-sm">All Appointments</button><br>
+                          <a href="{% url 'doctorsapp:allAppointments' %}"   class="btn btn-primary btn-sm">All Appointments</a><br>
                       </div>
                   </div>
 
@@ -167,38 +167,34 @@
                           <thead>
                             <tr>
                               <th scope="">S.N</th>
-                              <th scope="col">Appointment Fixed Date</th>
-                              <th scope="col">Applied On</th>   
-                              <th scope="col">Response</th>   
+                              <th scope="col">Appointment Fixed Date and Time</th>
+                              <th scope="col">Status</th>   
+                              <th scope="col">Applied on</th>   
                         
                             </tr>
                           </thead>
                           <tbody>
                               {% for i in appointments %}
-                              {% if i.seen == True %}
-                              <tr>
-                                  <th scope="row">{{ forloop.counter }}</th>
-                                  <td>{{ i.appointmentdate}}</td>
-                                  <td>{{ i.appliedon}}</td>
-                                
-                                 
-                                  <!-- <td><a href=""><button class="btn btn-info btn-sm" >View Response</button></a></td> -->
-                                  
-                                </tr>
-                           
-                            {% else %}
+                           {% if i.response == None %}
                             <tr class="table-info">
                               <th scope="row">{{ forloop.counter }}</th>
-                              <td>Pending</td>
-                              <td>{{ i.appliedon}}</td>
-                            
-                             
+                              <td><a href="{% url 'doctorsapp:appdetail' i.id%}"><small class="text-dark">{{ i.date}} {{i.time}}</small></a></td>
                               <td><p class="badge badge-warning">Pending</p></td>
+                              <td><small>{{ i.applied_date}}</small></td>
+
                               
                             </tr>
+                            {% else %}
+                            <tr >
+                              <th scope="row">{{ forloop.counter }}</th>
+                              <td><a href="{% url 'doctorsapp:appdetail' i.id%}"><small class="text-dark">{{ i.date}} {{i.time}}</small></a></td>
+                              <td><p class="badge badge-success">Completed</p></td>
+                              <td><small>{{ i.applied_date}}</small></td>
+
+                            </tr>
                   
-                            {% endif %}
-                           
+                            
+                           {% endif %}
                             {% empty %}
                           <tr>
                               

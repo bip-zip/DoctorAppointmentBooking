@@ -1,0 +1,52 @@
+{% extends 'doctorsapp/layout.html' %}
+{% load static %}
+{% block title %}
+<title>Appointment Details</title>
+{% endblock %}
+{% block content %}
+<style>
+  
+
+</style>
+
+{% include 'mainapp/messages.html' %}
+<br>
+<h2 class="text-center text-info">Appointments</h2>
+<br>
+<div class="ok container my-3">
+  <div class="container">
+    <div class="border border-info card p-5 my-4 ">
+        <h4>
+            Appointment details:
+        </h4><hr>
+        <p>Dear, <b>{{appointment.doctor.user.first_name}} {{appointment.doctor.user.last_name}}</b>.</p>
+        <p class='text-left'>Your appointment has been successfully completed on following date and time.</p>
+            <p >Date : <b class='text-primary'>{{appointment.date}}</b></p>
+            <p >Time : <b class='text-primary'>{{appointment.time}}</b></p>
+        <p>With  {{appointment.user.first_name}} {{appointment.user.last_name}}</b> according to his provided details.</p>
+            <p >Problem : <b class='text-dark'>{{appointment.doctor.specilization.problem_related}}</b></p>
+            <p >Description : <b class='text-dark'>{{appointment.desc}}</b></p>
+        <p>The appointment was applied on {{appointment.applied_date}}.</p><hr>
+        {% if not appointment.response == None%}
+        <p>You had prescribed the following details:</p>
+        <p><i>{{appointment.response}}</i></p><hr>
+        
+        {% endif%}
+        <div class="col-lg-9 mx-auto ">
+            <form method="POST">
+                <table>
+                    {%csrf_token%}
+                    {{form.as_table}}
+                </table>
+                <button type="submit" class="btn btn-info mt-5 btn-sm" onclick="return confirm('Confirm Update')">Reply response</button>
+            </form>
+        </div>
+    </div>
+
+    </div>
+  </div>
+
+
+<br> <br> <br>
+{% include 'mainapp/footer.html' %}
+{% endblock %}

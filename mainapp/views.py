@@ -22,9 +22,7 @@ def profile(request):
     }
     return render(request,'mainapp/profile.html',context)
 
-def contact(request):
-    context={'active_contact':'active'}
-    return render(request,'mainapp/contact.html',context)
+
 
 
 from django.core.mail import send_mail
@@ -85,6 +83,7 @@ def response(request,id):
     return render(request,'mainapp/appointResponse.html',context)
 
 from django.template.loader import render_to_string
+
 def checkAvaibility(request):
     if request.method == "POST":
         problem=request.POST['problem']
@@ -101,21 +100,3 @@ def checkAvaibility(request):
 
 
         
-        # if checkRight.count() > 0 :
-        #     checkRight.delete()
-        #     actualVote=answer.actual_vote
-        #     return JsonResponse({'bool':True,'actualVote':actualVote})
-
-        # elif checkWrong.count() > 0 :
-        #     checkWrong.delete()
-        #     RightPoint.objects.create(
-        #         answer=answer,
-        #         user=user)
-        #     actualVote=answer.actual_vote
-        #     return JsonResponse({'bool':True,'actualVote':actualVote})
-        # else:
-        #     RightPoint.objects.create(
-        #         answer=answer,
-        #         user=user)
-        #     actualVote=answer.actual_vote
-        #     return JsonResponse({'bool':True,'actualVote':actualVote})

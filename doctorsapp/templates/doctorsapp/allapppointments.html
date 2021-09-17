@@ -1,0 +1,69 @@
+{% extends 'doctorsapp/layout.html' %}
+{% load static %}
+{% block title %}
+<title>Doctor-AllAppointments</title>
+{% endblock %}
+{% block content %}
+<style>
+  
+
+</style>
+
+{% include 'mainapp/messages.html' %}
+<br>
+<h2 class="text-center text-info">Appointments</h2>
+<br>
+<div class="ok container my-3">
+    <div class="container mt-2">
+        <table class="table">
+            <thead>
+              <tr>
+                <th scope="">S.N</th>
+                <th scope="col">Appointment Fixed Date and Time</th>
+                <th scope="col">Status</th>   
+                <th scope="col">Applied on</th>   
+          
+              </tr>
+            </thead>
+            <tbody>
+                {% for i in appointments %}
+             {% if i.response == None %}
+              <tr class="table-info">
+                <th scope="row">{{ forloop.counter }}</th>
+                <td><a href="{% url 'doctorsapp:appdetail' i.id%}"><small class="text-dark">{{ i.date}} {{i.time}}</small></a></td>
+                <td><p class="badge badge-warning">Pending</p></td>
+                <td><small>{{ i.applied_date}}</small></td>
+
+                
+              </tr>
+              {% else %}
+              <tr >
+                <th scope="row">{{ forloop.counter }}</th>
+                <td><a href="{% url 'doctorsapp:appdetail' i.id%}"><small class="text-dark">{{ i.date}} {{i.time}}</small></a></td>
+                <td><p class="badge badge-success">Completed</p></td>
+                <td><small>{{ i.applied_date}}</small></td>
+
+              </tr>
+    
+              
+             {% endif %}
+              {% empty %}
+            <tr>
+                
+                <td><h5 class="text-center my-4 text-secondary">No prevoius appointments</h5></td>
+                
+
+            </tr>
+            {% endfor %}
+            
+    
+
+            </tbody>
+          </table>
+    </div>
+  </div>
+
+
+<br> <br> <br>
+{% include 'mainapp/footer.html' %}
+{% endblock %}
