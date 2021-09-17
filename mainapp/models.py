@@ -48,5 +48,9 @@ class Availabity(models.Model):
     def __str__(self):
         return str(self.doctor.user.first_name +' '+ self.doctor.user.last_name + ' '+ str(self.date) +' '+ str(self.time) )
 
-
+  
+    @property
+    def is_past_due(self):
+        from datetime import date
+        return date.today() > self.date
 

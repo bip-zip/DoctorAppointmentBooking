@@ -94,7 +94,7 @@
                     
                     <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
                         <div class="text-right">
-                            <button type="button" class="btn btn-outline-primary btn-sm">All Appointments</button><br>
+                            <a href="/app/oldappointment" class="btn btn-outline-primary btn-sm">All Appointments</a><br>
                         </div>
                     </div>
 
@@ -115,13 +115,13 @@
 
                                 <tr>
                                    
-                                    <th><a href="{% url 'mainapp:response' id=i.id %}"> {{ i.doctor.user.first_name}} {{ i.doctor.user.last_name}}</a></th>
+                                    <th><a href="{% url 'mainapp:response' id=i.id %}">Dr.  {{ i.doctor.user.first_name}} {{ i.doctor.user.last_name}}</a></th>
                                     <td><small>{{ i.applied_date}}</small></td>
                                     <td><small>{{ i.date}}, {{i.time}}</small></td>
                                     {% if not i.response == None%}
-                                    <td class='badge badge-success'>Completed</td>
+                                    <td > <small class='badge badge-success badge-sm'>Completed</small></td>
                                     {% else%}
-                                    <td class='badge badge-warning'>Pending</td>
+                                    <td> <small class='badge badge-warning badge-sm'>Pending</small> </td>
 
                                     {% endif%}
                                   </tr>

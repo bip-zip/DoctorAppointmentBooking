@@ -3,64 +3,54 @@
 {% block navblock %}
 <title>appointment details</title>
 
-<h2 class="text-center">
-    Response For Your Appointment 
 
-</h2>
 <br>
 
 <div class="container">
-    <div class="col-lg-8 mx-auto">
-        <h5 class="alert alert-info text-white" style="background-color: green  !important;">Response:&nbsp;{{appointment.response}}</h5>
-        <div class="border rounded ">
-            <table class="table table-striped">
-                <tr>
-                    <th>Name:&nbsp;{{appointment.name}}</th>         
-                </tr>
-                
-                <tr>
-                    <th>Phone:&nbsp;{{appointment.phonenumber}}</th>
-                    
-                </tr>
-                <tr>
-                    <th>Email:&nbsp;{{appointment.email}}</th>
-                    
-                </tr>
-                <tr>
-                    <th>Age:&nbsp;{{appointment.age}}</th>
-                    
-                </tr>
-                <tr>
-                    <th>Address:&nbsp;{{appointment.address}}</th>
-                    
-                </tr>
-               
-                
-                <tr>
-                    <th>Desc:&nbsp;{{appointment.desc}}</th>
-                    
-                </tr>
-               
-                
-                <tr>
-                    <th>Applied On:&nbsp;{{appointment.appliedon}}</th>
-                    
-                </tr>
-                <tr>
-                    <th>Expected Date:&nbsp;{{appointment.date}}</th>
-                    
-                </tr>
+    <div class="col-lg-8  mx-auto">
+        {% if appointment.response == None %}
+        <div class="border border-info card p-5 my-4 ">
+            <h4>
+                Appointment details:
+            </h4><hr>
+            <p>Dear, <b>{{appointment.user.first_name}} {{appointment.user.last_name}}</b>.</p>
+            <p class='text-left'>Your appointment has been successfully booked on following date and time.</p>
+                <p >Date : <b class='text-primary'>{{appointment.date}}</b></p>
+                <p >Time : <b class='text-primary'>{{appointment.time}}</b></p>
+            <p>With our experienced {{appointment.doctor.specilization}}, <b>Dr. {{appointment.doctor.user.first_name}} {{appointment.doctor.user.last_name}}</b> according to your provided details.</p>
+                <p >Problem : <b class='text-dark'>{{appointment.doctor.specilization.problem_related}}</b></p>
+                <p >Description : <b class='text-dark'>{{appointment.desc}}</b></p>
+            <p>The appointment was applied on {{appointment.applied_date}}.</p>
+            <div class="col-lg-4 mx-auto ">
+            <a href="{%url 'mainapp:oldappointment'%}" class="btn btn-info mt-5 btn-sm">Back To All Appointments</a>
 
-                <tr class="text-primary">
-                    <th>Doctor Name:&nbsp;{{appointment.doctor.doctorName}}</th>
-                    
-                </tr>
-                
-
-            </table>
-            <a href="{%url 'mainapp:oldappointment'%}" class="btn btn-primary">Back To All Appointments</a>
-          
+            </div>
+            
         </div>
+        {% else %}
+        <div class="border border-info card p-5 my-4 ">
+            <h4>
+                Appointment details:
+            </h4><hr>
+            <p>Dear, <b>{{appointment.user.first_name}} {{appointment.user.last_name}}</b>.</p>
+            <p class='text-left'>Your appointment has been successfully completed on following date and time.</p>
+                <p >Date : <b class='text-primary'>{{appointment.date}}</b></p>
+                <p >Time : <b class='text-primary'>{{appointment.time}}</b></p>
+            <p>With our experienced {{appointment.doctor.specilization}}, <b>Dr. {{appointment.doctor.user.first_name}} {{appointment.doctor.user.last_name}}</b> according to your provided details.</p>
+                <p >Problem : <b class='text-dark'>{{appointment.doctor.specilization.problem_related}}</b></p>
+                <p >Description : <b class='text-dark'>{{appointment.desc}}</b></p>
+            <p>The appointment was applied on {{appointment.applied_date}}.</p><hr>
+            <p>The concerned doctor has prescribed you following details:</p>
+            <p><i>{{appointment.response}}</i></p>
+            <p>Thank you!</p>
+            <div class="col-lg-4 mx-auto ">
+            <a href="{%url 'mainapp:oldappointment'%}" class="btn btn-info mt-5 btn-sm">Back To All Appointments</a>
+
+            </div>
+            
+        </div>
+
+        {%endif%}
             
             
            
@@ -72,6 +62,10 @@
     </div>
 
 </div>
+
+
+    
+
 
 
 

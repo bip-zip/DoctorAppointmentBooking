@@ -1,7 +1,7 @@
 {% extends 'doctorsapp/layout.html' %}
 {% load static %}
 {% block title %}
-<title>Doctor-Dashboard</title>
+<title>Doctor-Availability</title>
 {% endblock %}
 {% block content %}
 <style>
@@ -69,51 +69,10 @@
 
 
 </style>
-<div class="container">
 
-  
-  <br>
-  <div class="row">
-    <div class="col-lg-4">
-      <div class="card text-white bg-dark mb-3" style="max-width: 20rem;">
-        <a href="">
-        <div class="card-header text-center">Total Appointments &nbsp;<i class="fas fa-users"></i></div>
-        <div class="card-body">
-          <h1 class="card-title text-center">{{all_appointments}}</h1>
-        </div>
-        </a>
-      </div>
-    </div>
-    <div class="col-lg-4">
-      <div class="card text-white bg-dark mb-3" style="max-width: 20rem;">
-        <a href="">
-          <div class="card-header text-center">Total Completed &nbsp;<i class="fas fa-user-md"></i></div>
-          <div class="card-body">
-            <h1 class="card-title text-center">{{completed}}</h1>
-          </div>
-        </a>
-
-      </div>
-    </div>
-
-
-    <div class="col-lg-4">
-      <div class="card text-white bg-dark mb-3" style="max-width: 20rem;">
-        <a href="">
-          <div class="card-header text-center">Not Responded &nbsp;<i class="far fa-calendar-check"></i></div>
-          <div class="card-body">
-            <h1 class="card-title text-center">{{not_responded}}</h1>
-          </div>
-        </a>
-      </div>
-    </div>
-  </div>
-</div>
-</div>
-</div>
 {% include 'mainapp/messages.html' %}
 <br>
-<h2 class="text-center text-info">Doctor's Profile</h2>
+<h2 class="text-center text-info">Doctor's Availability</h2>
 <br>
 <div class="ok container my-3">
   <div class="container">
@@ -136,12 +95,9 @@
                       <p>DoB: {{request.user.doctor.dob}}</p>
                       <p>Experience: {{request.user.doctor.total_experience_years}} years</p>
                       <p>Spealization: {{request.user.doctor.specilization}}</p>
-                      <p>Degree: </p>
-                      <img src="{{request.user.doctor.maximum_degree.url}}" alt="degree" height="200" width="100">
                       
                       <br>
-                      <a href="{% url 'doctorsapp:addavai' %}" class="btn btn-info btn-sm">Add availability</a>
-                      <a href="{% url 'accounts:dprofileupdate' user.doctor.id %}" class="btn btn-primary btn-sm mt-3">Update details</a>
+                      <a href="{% url 'doctorsapp:doctorhome' %}" class="btn btn-primary btn-sm mt-3">Back to profile</a>
 
                   </div>
               </div>
@@ -153,12 +109,13 @@
           <div class="card-body">
               <div class="row gutters">
                   <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
-                      <h5 class="mb-2 text-primary text-center fw-light ">Your previous appointments</h5>
+                      <h5 class="mb-2 text-primary text-center fw-light ">Your availabilities:</h5>
                   </div>
                   
                   <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
                       <div class="text-right">
-                          <button type="button" class="btn btn-outline-primary btn-sm">All Appointments</button><br>
+                        <button type="button" class="btn btn-outline-primary btn-sm" data-toggle="modal" data-target="#exampleModalCenter">Add Availability</button>
+                        <br>
                       </div>
                   </div>
 
@@ -167,48 +124,54 @@
                           <thead>
                             <tr>
                               <th scope="">S.N</th>
-                              <th scope="col">Appointment Fixed Date</th>
-                              <th scope="col">Applied On</th>   
-                              <th scope="col">Response</th>   
+                              <th scope="col">Date</th>
+                              <th scope="col">Time</th>   
+                              <th scope="col">Status</th>   
+                              <th>Action</th>
                         
                             </tr>
                           </thead>
                           <tbody>
-                              {% for i in appointments %}
-                              {% if i.seen == True %}
-                              <tr>
-                                  <th scope="row">{{ forloop.counter }}</th>
-                                  <td>{{ i.appointmentdate}}</td>
-                                  <td>{{ i.appliedon}}</td>
-                                
-                                 
-                                  <!-- <td><a href=""><button class="btn btn-info btn-sm" >View Response</button></a></td> -->
-                                  
-                                </tr>
-                           
-                            {% else %}
-                            <tr class="table-info">
-                              <th scope="row">{{ forloop.counter }}</th>
-                              <td>Pending</td>
-                              <td>{{ i.appliedon}}</td>
-                            
+                              {% for i in all_avai %}
                              
-                              <td><p class="badge badge-warning">Pending</p></td>
+                            <tr class="table">
+                              <th scope="row">{{ forloop.counter }}</th>
+                              <td>{{i.date}}</td>
+                              <td>{{i.time}}</td>
+                              {% if i.booked %}
+                                <td ><small class='badge badge-success badge-sm'>Booked</small> </td>
+                                <td>---</td>
+                                {% elif i.is_past_due %}
+                                <td ><small class='badge badge-danger badge-sm'>Expired</small> </td>
+                                <td>---</td>
+                                {% else %}
+                                <td > <small class='badge badge-warning'> Not booked</small></td>
+                                <td>
+                                    <div class="btn-group">
+                                        <a  href='{% url "doctorsapp:updateavai" i.id%}' type="button" class='btn btn-primary btn-sm mx-1'  ><i class='fas fa-edit'></i></a>
+                                        <a href="" class='btn btn-danger btn-sm'><i class='fas fa-trash'></i></a>
+                                        
+                                    </div>
+                                </td>
+                                {% endif %}
+                    
+                              
                               
                             </tr>
                   
-                            {% endif %}
+                      
                            
                             {% empty %}
                           <tr>
                               
-                              <td><h5 class="text-center my-4 text-secondary">No prevoius appointments</h5></td>
+                              <td><h5 class="text-center my-4 text-secondary">No availabilities addded.</h5></td>
                               
 
                           </tr>
                           {% endfor %}
                           
-                  
+                         
+
               
                           </tbody>
                         </table>
@@ -223,6 +186,34 @@
       </div>
 </div>
 
+
+
+  
+  <!-- Modal -->
+  <div class="modal fade" id="exampleModalCenter" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="exampleModalLongTitle">Add Your Availability</h5>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="modal-body">
+         <form  method="post">
+             {% csrf_token %}
+             <table class="table table-striped">
+                {{ form.as_table}}
+             </table>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+          <button type="submit" class="btn btn-primary">Save changes</button>
+        </form>
+        </div>
+      </div>
+    </div>
+  </div>
 
 
 <br> <br> <br>
